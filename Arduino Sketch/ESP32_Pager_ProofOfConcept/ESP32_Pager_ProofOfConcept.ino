@@ -1,6 +1,12 @@
 /*
 ESP32 Pager Proof Of Concept
+This code implements a basic pager, initally designed for DAPNET use, but can be modified to suit any need.
 
+Additional files:
+-config.h contains the user configuration (frequency, offset, RIC, ringtones, etc)
+-periph.h contains pin assignment
+
+Frequency offset must be configured for reliable decoding. At present time, there isn't a "cal" mode available, but it is to be implemented.
 
 
 */
@@ -80,6 +86,7 @@ void displayPage(String address, String text) {
   display.display();
 }
 
+//Generates the tones based on predefined settings in config.h
 void ringBuzzer(int ringToneChoice) {
   for (int i = 0; i < NOTENUMBER; i++) {
     tone(BUZZER, beepTones[ringToneChoice][i], 130);
