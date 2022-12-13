@@ -29,7 +29,7 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RST);
 void setup() {
   Serial.begin(115200);
   displayInit();
-  hwInit();
+  ringBuzzer(STARTUPTONE);
   pocsagInit();
   pocsagStartRx();
 }
@@ -55,10 +55,10 @@ void loop() {
       for (int i = 0; i < RICNUMBER; i++) {
         if (addr == ric[i].ricvalue) {
           displayPage(ric[i].name, str);
-          ringBuzzer();
+          ringBuzzer(ric[i].ringtype);
         }
       }
-      
+
 
     } else {
       // some error occurred
@@ -80,12 +80,10 @@ void displayPage(String address, String text) {
   display.display();
 }
 
-void ringBuzzer() {
-  tone(BUZZER, 2731, 130);
-  tone(BUZZER, 3202, 130);
-  tone(BUZZER, 2731, 130);
-  tone(BUZZER, 3203, 130);
-  tone(BUZZER, 2731, 130);
+void ringBuzzer(int ringToneChoice) {
+  for (int i = 0; i < NOTENUMBER; i++) {
+    tone(BUZZER, beepTones[ringToneChoice][i], 130);
+  }
 }
 
 
@@ -107,13 +105,6 @@ void displayInit() {
 }
 
 
-void hwInit() {
-  tone(BUZZER, 2731, 120);
-  noTone(BUZZER);
-  delay(300);
-  tone(BUZZER, 3202, 120);
-  noTone(BUZZER);
-}
 
 
 void pocsagInit() {

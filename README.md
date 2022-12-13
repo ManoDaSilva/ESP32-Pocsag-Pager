@@ -12,9 +12,11 @@ Uses an ESP32 LORA32 TTGO. You must bridge DIO1 to pin 35 and DIO2 to pin 34 (br
 I added a buzzer on pin 14, and plan to add buttons in the near future
 
 # Next Steps
+* Write.Documentation.
 * ~~Add multi-address reception~~ Done.
-* Configurable ringtones
+* ~~Configurable ringtones~~ Done.
 * Implement a clean user interface to browse config, messages, etc. Currently experimenting with ArduinoMenu
 * Create a wifi configuration portal
 * Implement RTC
 * Settings storage in SPIFFS
+* Message storage in SPIFFS
