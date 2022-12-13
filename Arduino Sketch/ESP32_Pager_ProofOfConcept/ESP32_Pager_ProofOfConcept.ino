@@ -5,6 +5,7 @@ ESP32 Pager Proof Of Concept
 
 */
 #include "periph.h"
+#include "config.h"
 #include <RadioLib.h>
 #include <SPI.h>
 #include <Wire.h>
@@ -23,11 +24,6 @@ PagerClient pager(&radio);
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RST);
 
 
-
-
-// Global Config variables. Might be worth moving them to EEPROM at some time
-float offset = 0.0044;  // device specific, in MHz. VHF: 0.0014 UHF: 0.0044
-float frequency = 439.98750;
 
 
 void setup() {
@@ -56,11 +52,13 @@ void loop() {
       Serial.print(F("[Pager] Data:\t"));
       Serial.println(str);
 
-
-      if(addr==65009){
-        displayPage(addr,str);
-        ringBuzzer();
+      for (int i = 0; i < RICNUMBER; i++) {
+        if (addr == ric[i].ricvalue) {
+          displayPage(ric[i].name, str);
+          ringBuzzer();
+        }
       }
+      
 
     } else {
       // some error occurred
@@ -71,7 +69,7 @@ void loop() {
 }
 
 
-void displayPage(uint32_t address, String text) {
+void displayPage(String address, String text) {
   display.clearDisplay();
   display.setTextColor(WHITE);
   display.setTextSize(1);
@@ -82,7 +80,7 @@ void displayPage(uint32_t address, String text) {
   display.display();
 }
 
-void ringBuzzer(){
+void ringBuzzer() {
   tone(BUZZER, 2731, 130);
   tone(BUZZER, 3202, 130);
   tone(BUZZER, 2731, 130);
@@ -116,8 +114,6 @@ void hwInit() {
   tone(BUZZER, 3202, 120);
   noTone(BUZZER);
 }
-
-
 
 
 void pocsagInit() {
