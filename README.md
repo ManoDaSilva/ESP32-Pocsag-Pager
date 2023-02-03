@@ -2,7 +2,7 @@
  Proof-of-concept Pager using a TTGO dev board. Will be merged with the "Waffle" project someday.
  
 # Libraries
- * [RadioLib](https://github.com/jgromes/RadioLib) (temp ugly hack, but you must edit /modules/SX127X/SX127X.cpp, function readBit: updateDirectBuffer((uint8_t)!digitalRead(pin));)
+ * [RadioLib](https://github.com/jgromes/RadioLib)
  * Adafruit GFX (I plan to move tu U8G2 at some point)
  * Adafruiy SSD1306
  

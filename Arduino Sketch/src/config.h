@@ -1,8 +1,6 @@
 /*
 User-modifiable configuration
-
 In the near future, bring this to a menu, and load-edit them in SPIFFS
-
 */
 
 //Default settings
@@ -21,26 +19,26 @@ extern float frequency = 439.98750;
 #define CTONE 3201
 
 struct ric{
-  long ricvalue; //RIC adress itself
-  char* name; //"Nickname"
-  int ringtype; //TBD: ring "melody"
-  bool placeholder1;
-  bool placeholder2;
+    long ricvalue; //RIC adress itself
+    char* name; //"Nickname"
+    int ringtype; //TBD: ring "melody"
+    bool placeholder1;
+    bool placeholder2;
 }
 
 /*RICs the pager will respond to. As described by the struct above:
 {RIC,"NAME",ringtone(see below),TBD,TBD}
 */
 ric[RICNUMBER]={
-  {65009, "IND",2,0,0},
-  {1040, "EMERGENCY",0,0,0},
-  {1080, "APRSWX",1,0,0},
+        {65009, "IND",2,0,0},
+        {1040, "EMERGENCY",0,0,0},
+        {1080, "APRSWX",1,0,0},
 };
 
 //"melodies", 130ms tones. Individual frequencies, 8 slots. 0 equals to a 130ms silence.
 int beepTones[RINGTONE][NOTENUMBER]={
-  {ATONE,CTONE,ATONE,CTONE,ATONE,0,0,0},
-  {CTONE,0,ATONE,0,BTONE,BTONE,0,ATONE},
-  {ATONE,CTONE,CTONE,0,ATONE,CTONE,CTONE,0},
-  {ATONE,0,0,CTONE,0,0,0,0}, //Startup ringtone
+        {ATONE,CTONE,ATONE,CTONE,ATONE,0,0,0},
+        {CTONE,0,ATONE,0,BTONE,BTONE,0,ATONE},
+        {ATONE,CTONE,CTONE,0,ATONE,CTONE,CTONE,0},
+        {ATONE,0,0,CTONE,0,0,0,0}, //Startup ringtone
 };
